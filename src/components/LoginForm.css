@@ -1,0 +1,133 @@
+/* Ensure the body takes up full height and the background image is set properly */
+body {
+  
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-x: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative; /* Ensure overlay is on top */
+  
+    
+  
+}
+
+/* Background Overlay */
+.overlay {
+  position: fixed; /* Position it fixed on the screen */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark shadow with opacity */
+  z-index: 9999; /* Make sure it covers everything */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+   
+  
+}
+
+/* Center everything in the .login-container */
+.login-container {
+  display: flex;
+  align-items: auto;
+  justify-content: center;
+  width: 1500px;
+  height: 100%;
+  font-size:fixed ;
+  
+  
+}
+
+/* Customize the Card component */
+.login-card {
+max-width: 600px;
+margin: 50px auto;
+background: #fff;
+padding: 20px;
+border-radius: 40px;
+box-shadow: 1px 1px 5px 5px 
+
+  
+}
+
+/* Title Styling */
+.login-title {
+  color: #0764ce;
+  font-weight: 650;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 40px;
+  
+  
+  
+}
+
+/* Style the form inputs */
+.form-control-custom {
+  width: 100%;
+  margin: auto;
+  border-radius: 5px;
+  padding: 0.5rem;
+  
+}
+
+/* Customize the submit button */
+.submit-button {
+  display: block;
+  width: 100%;
+  background: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+     
+}
+
+.submit-button:hover {
+  background-color: #032141;
+  align-items: center;
+}
+
+/* Add a margin below the form elements */
+.form-group-custom {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  
+}
+
+/* Styling the image */
+img {
+  width: auto;
+  max-width: 400px;
+  margin-bottom: 20px;
+  
+}
+
+/* Spinner customization */
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-width: 1rem;
+  display: inline-block; /* Ensure it's inline-block for proper display */
+  margin-right: 10px; /* Space between the spinner and text */
+  
+}
+
+.css-1c84t2p {  
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  color: rgb(247, 6, 6);
+  height: 1em; 
+}
+
+
