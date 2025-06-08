@@ -44,7 +44,7 @@ const LearnerPerformance = () => {
               <td>{learnerInfo.Batch}</td>
               <td>{learnerInfo.RollNo}</td>
               <td>{learnerInfo.Password}</td>
-              <td>Session : 2024-25</td>               
+              <td>Session : 2025-26</td>               
             </tr>
           </tbody>
         </table>
