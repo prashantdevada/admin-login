@@ -2,7 +2,7 @@
 import LoginForm from "./components/LoginForm";
 import LearnerPerformance from "./components/LearnerPerformance";
 import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
-
+import './learnerperformance';
 
 function App() {
   return (
