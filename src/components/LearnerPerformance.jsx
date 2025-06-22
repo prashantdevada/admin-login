@@ -25,7 +25,7 @@ const LearnerPerformance = () => {
       </div>
 
       {/* "Ahmedabad Centre" Heading */}
-      <h1 className="center-heading">Ahmedabad Centre</h1>
+      <h1 className="center-heading">AHMEDABAD CENTRE</h1>
 
       <div className="learner-performance"> {/* Main report content container */}
         {/* Learner Information Section */}
@@ -53,6 +53,45 @@ const LearnerPerformance = () => {
           </table>
         </div>
 
+ {/* Learner Attendance Report Section */}
+<h3 className="attendance-title">ATTENDANCE REPORT</h3>
+        <div className="table-container">
+          <table className="custom-table performance-marks-table">
+              <thead>
+              <tr>
+                <th>APR</th>
+                <th>MAY</th>
+                <th>JUN</th>
+                <th>JUL</th>
+                <th>AUG</th>
+                <th>SEP</th>
+                <th>OCT</th>
+                <th>NOV</th>
+                <th>DEC</th>
+                <th>JAN</th>
+                <th>FEB</th>
+                <th>MAR</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{learnerInfo.APR}</td>                             
+                <td>{learnerInfo.MAY}</td>
+                <td>{learnerInfo.JUN}</td>
+                <td>{learnerInfo.JUL}</td>
+                <td>{learnerInfo.AUG}</td>
+                <td>{learnerInfo.SEP}</td>
+                <td>{learnerInfo.OCT}</td>
+                <td>{learnerInfo.NOV}</td>
+                <td>{learnerInfo.DEC}</td>
+                <td>{learnerInfo.JAN}</td>
+                <td>{learnerInfo.FEB}</td>
+                <td>{learnerInfo.MAR}</td>                
+              </tr>
+            </tbody>
+          </table>
+        </div>      
+        
         {/* Learner Performance Report Section */}
         <h2 className="section-title">LEARNER PERFORMANCE REPORT</h2>
         <div className="table-container">
@@ -92,6 +131,7 @@ const LearnerPerformance = () => {
           </table>
         </div>
       </div>
+    
     </>
   );
 };
