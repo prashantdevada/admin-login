@@ -54,7 +54,7 @@ const LearnerPerformance = () => {
         </div>
 
  {/* Learner Attendance Report Section */}
-<h3 className="attendance-title">ATTENDANCE REPORT</h3>
+<h3 className="attendance-title">ATTENDANCE REPORT 2025-26</h3>
         <div className="table-container">
           <table className="custom-table performance-marks-table">
               <thead>
