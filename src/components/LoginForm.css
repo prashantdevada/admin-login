@@ -8,10 +8,9 @@
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(1px);
   z-index: 999;
-  
 }
 
-/* Full page background with gradient === */
+/* === Full page background with gradient === */
 .login-container {
   display: flex;
   justify-content: center;
@@ -20,20 +19,18 @@
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   padding: 100px;
-  
 }
- 
-/* Card container === */
+
+/* === Card container === */
 .login-card {
   background-color: #f9f9fc;
-  padding: .0rem;
+  padding: 2rem;
   border-radius: 20px;
   width: 100%;
   max-width: 420px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
   text-align: center;
-  
 }
 
 /* === Logo styling === */
@@ -43,7 +40,12 @@
   max-width: 230px;
   height: auto;
   animation: float 3s ease-in-out infinite;
-  
+}
+
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
 }
 
 /* === Login title === */
@@ -53,7 +55,6 @@
   color: #003366;
   margin-bottom: 10px;
   letter-spacing: 0.5px;
-
 }
 
 /* === Input fields === */
@@ -62,8 +63,7 @@
   padding: 12px 14px;
   font-size: 1rem;
   border: 1px solid #9e9e9f;
-  transition: 0.10s ease;
-  
+  transition: 0.2s ease;
 }
 
 .form-control:focus {
@@ -84,13 +84,14 @@
   margin-top: 20px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 14px rgba(0, 123, 255, 0.3);
-  }
+}
 
 .submit-button:hover {
   background: linear-gradient(45deg, #0056b3, #0096c7);
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(0, 123, 255, 0.4);
- }
+}
+
 /* === Social icons styling === */
 .social-icons {
   margin-top: 25px;
@@ -101,15 +102,16 @@
 
 .social-icons a {
   color: #495057;
-  font-size: 16px;
+  font-size: 20px;
   transition: all 0.3s ease;
-  color: #656666;
 }
 
 .social-icons a:hover {
   color: #007bff;
   transform: scale(1.25);
 }
+
+/* === Form labels === */
 label {
   font-weight: 600;
   color: #444;
@@ -117,8 +119,11 @@ label {
   display: block;
   margin-bottom: 6px;
 }
+
+/* === Input with icon === */
 .input-with-icon {
   position: relative;
+  margin-bottom: 1rem;
 }
 
 .input-with-icon .icon {
@@ -127,6 +132,7 @@ label {
   left: 12px;
   transform: translateY(-50%);
   color: #888;
+  font-size: 1rem;
 }
 
 .input-with-icon .form-control {
@@ -140,4 +146,5 @@ label {
   transform: translateY(-50%);
   cursor: pointer;
   color: #888;
+  font-size: 1rem;
 }
