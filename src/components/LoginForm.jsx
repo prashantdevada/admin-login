@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { Container, Col, Form, Button, Card, Spinner } from 'react-bootstrap';
+import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './LoginForm.css';
 import { useNavigate } from 'react-router-dom';
-import { FaUser } from "react-icons/fa";
-import { FaEyeSlash } from "react-icons/fa";
-import { FaEye } from "react-icons/fa";
-
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -71,36 +68,37 @@ const LoginForm = () => {
               <h2 className="login-title">Learner Login</h2>
 
               <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formBasicUsername" className="form-group-custom text-start">
-                  <Form.Label className="text-start d-block fw-semibold">Roll Number</Form.Label>
+                <Form.Group controlId="formUsername">
+                  <Form.Label>Roll Number</Form.Label>
                   <div className="input-with-icon">
-                    <i className="fauser icon"><FaUser /></i>
-                    
+                    <span className="icon"><FaUser /></span>
                     <Form.Control
                       type="text"
-                      placeholder="Enter your Roll Number"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
-                      className="form-control"
+                      placeholder="Enter your Roll Number"
+                      required
                     />
                   </div>
                 </Form.Group>
 
-                <Form.Group controlId="formBasicPassword" className="form-group-custom text-start">
-                  <Form.Label className="text-start d-block fw-semibold">Password</Form.Label>
+                <Form.Group controlId="formPassword" className="mt-3">
+                  <Form.Label>Password</Form.Label>
                   <div className="input-with-icon">
-                    <i className="fas fa-lock icon"></i>
+                    <span className="icon"><FaLock /></span>
                     <Form.Control
                       type={showPassword ? 'text' : 'password'}
-                      placeholder="Enter your password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="form-control"
+                      placeholder="Enter your password"
+                      required
                     />
-                    <i
-                      className={`fa ${showPassword ? 'FaEyeSlash' : 'FaEye'} toggle-password`}
+                    <span
+                      className="toggle-password"
                       onClick={() => setShowPassword(!showPassword)}
-                    ></i>
+                    >
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </span>
                   </div>
                 </Form.Group>
 
@@ -118,6 +116,7 @@ const LoginForm = () => {
                   )}
                 </Button>
 
+                {/* Social Icons */}
                 <div className="social-icons mt-4">
                   <a href="https://www.facebook.com/unacademyahmedabad/" target="_blank" rel="noopener noreferrer">
                     <i className="fab fa-facebook-f"></i>
