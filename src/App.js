@@ -2,7 +2,6 @@
 import LoginForm from "./components/LoginForm";
 import LearnerPerformance from "./components/LearnerPerformance";
 import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
-import '@fortawesome/fontawesome-free/css/all.min.css';
 function App() {
   return (
     <Router>
