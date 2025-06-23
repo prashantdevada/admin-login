@@ -3,6 +3,10 @@ import { Container, Col, Form, Button, Card, Spinner } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './LoginForm.css';
 import { useNavigate } from 'react-router-dom';
+import { FaUser } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
+
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -70,7 +74,8 @@ const LoginForm = () => {
                 <Form.Group controlId="formBasicUsername" className="form-group-custom text-start">
                   <Form.Label className="text-start d-block fw-semibold">Roll Number</Form.Label>
                   <div className="input-with-icon">
-                    <i className="fas fa-user icon"></i>
+                    <i className="fauser icon"><FaUser /></i>
+                    
                     <Form.Control
                       type="text"
                       placeholder="Enter your Roll Number"
@@ -93,7 +98,7 @@ const LoginForm = () => {
                       className="form-control"
                     />
                     <i
-                      className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'} toggle-password`}
+                      className={`fa ${showPassword ? 'FaEyeSlash' : 'FaEye'} toggle-password`}
                       onClick={() => setShowPassword(!showPassword)}
                     ></i>
                   </div>
