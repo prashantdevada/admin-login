@@ -12,5 +12,3 @@ root.render(
    <title>learnerreport</title>
   </React.StrictMode>
 );
-
-
