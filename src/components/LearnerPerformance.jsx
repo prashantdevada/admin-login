@@ -16,13 +16,8 @@ const LearnerPerformance = () => {
     <>
       {/* Header Container for Logo - now only for centering the logo */}
       <div className="header-container">
-        <img
-          src="https://v.fastcdn.co/u/67ec1086/61513884-0-Unacademy-Logo-RGB.png" // Your logo URL
-          alt="Unacademy Logo"
-          className="logo" // This correctly applies the CSS class
-        />
-        {/* Print button removed as requested */}
-      </div>
+  <img src="https://v.fastcdn.co/u/67ec1086/61513884-0-Unacademy-Logo-RGB.png" alt="Unacademy Logo" className="logo" />
+</div>
 
       {/* "Ahmedabad Centre" Heading */}
       <h1 className="center-heading">AHMEDABAD CENTRE</h1>
