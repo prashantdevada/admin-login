@@ -10,22 +10,16 @@ body {
 
 /* Header Container for Logo - now only for centering the logo */
 .header-container {
-    display: flex;
-    justify-content: center; /* This centers the logo horizontally */
-    align-items: center;
-    width: 95%;
-    max-width: 1200px;
-    margin: 10px 10px 10px 10px; /* Center the container itself and add some bottom margin */
-    padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
-/* Logo Styling */
 .logo {
-    margin: 0; /* Reset margins from previous generic logo rule, let header-container handle centering */
-    padding: 0;
-    max-width: 250px; /* Adjusted to a slightly larger max-width for better visibility */
-    height: auto;     /* Maintain aspect ratio */
-    display: block;   /* Ensure it's treated as a block element */
+  max-width: 250px;
+  height: auto;
+  display: block;
 }
 
 /* Removed Print Button Styling entirely */
