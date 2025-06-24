@@ -16,15 +16,15 @@ body {
   margin-top: 20px;
 }
 
+/* Logo Styling */
 .logo {
-  max-width: 250px;
-  height: auto;
-  display: block;
+    margin: 0; /* Reset margins from previous generic logo rule, let header-container handle centering */
+    padding: 0;
+    max-width: 250px; /* Adjusted to a slightly larger max-width for better visibility */
+    height: auto;     /* Maintain aspect ratio */
+    display: block;   /* Ensure it's treated as a block element */
+    
 }
-
-/* Removed Print Button Styling entirely */
-
-
 /* Main Container for Learner Performance Report */
 .learner-performance {
     display: flex;
@@ -32,7 +32,7 @@ body {
     align-items: center;
     min-height: 540px;
     padding: 15px 0%;
-    background-color: #ffffff;
+    background-color: #ffffffc9;
     box-shadow: 1 2px 10px rgba(0, 0, 0, 0.08);
     margin: 20px auto;
     max-width: 1200px;
@@ -196,9 +196,11 @@ body {
     }
 
     .section-title {
-        font-size: 1.4rem;
-        margin-top: 30px;
-        margin-bottom: 15px;
+        .section-title,
+  .attendance-title {
+    font-size: 1.25rem;
+  }
+
     }
 
     .table-container {
@@ -244,12 +246,7 @@ body {
         font-size: 10pt;
     }
 
-    /* Removed print button hiding */
-    .header-container {
-        justify-content: center; /* Logo should still be centered on print */
-        margin-bottom: 0;
-        padding: 0;
-    }
+    
     .logo {
         display: block !important; /* Ensure logo is visible on print, if desired */
         max-width: 140px; /* Smaller logo for print */
