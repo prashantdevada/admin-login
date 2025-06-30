@@ -1,0 +1,321 @@
+/* General Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/* Header Container for Logo - now only for centering the logo */
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Logo Styling */
+.logo {
+    margin: 0; /* Reset margins from previous generic logo rule, let header-container handle centering */
+    padding: 0;
+    max-width: 250px; /* Adjusted to a slightly larger max-width for better visibility */
+    height: auto;     /* Maintain aspect ratio */
+    display: block;   /* Ensure it's treated as a block element */
+    
+}
+/* Main Container for Learner Performance Report */
+.learner-performance {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 540px;
+    padding: 15px 0%;
+    background-color: #ffffffc9;
+    box-shadow: 1 2px 10px rgba(0, 0, 0, 0.08);
+    margin: 20px auto;
+    max-width: 1200px;
+    border-radius: 10px;
+}
+
+/* Heading for "AHMEDABAD CENTRE" */
+.center-heading {
+    font-size: 2.5rem;
+    color: #0d47a1;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* General Section Titles (e.g., "LEARNER INFORMATION", "LEARNER PERFORMANCE REPORT") */
+.section-title {
+    font-size: 1.8rem;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: #0d47a1;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Container (wraps individual tables) */
+.table-container {
+    width: 100%; /* Table container ki width badhai */
+    max-width: 1100px; /* Max width for consistency */
+    border-radius: 8px;
+    overflow-x: hidden; /* <-- Yahan badlav karein: 'auto' se 'hidden' */
+    padding: 5px 5px; /* Padding adjust ki */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Base Styling for all Custom Tables */
+.custom-table {
+    width: 100%; /* Table takes full width of its container */
+    min-width: 600px; /* Ensures table has a minimum width for legibility before scrolling */
+    background-color: #ffffff;
+    border-collapse: collapse; /* Removes spacing between borders */
+    text-align: center;
+    margin: 2px 0;
+    font-size: 0.90rem;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden; /* Ensures rounded corners are applied to content */
+}
+
+/* Table Header Cells - General */
+.custom-table th {
+    color: white;
+    font-weight: 600;
+    padding: 12px 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid; /* Defined by specific table below */
+    white-space: nowrap; /* Prevent header text from wrapping too much */
+}
+
+/* Table Data Cells - General */
+.custom-table td {
+    padding: 10px;
+    font-weight: 500;
+    color: #444;
+    border: 1px solid; /* Defined by specific table below */
+}
+
+/* Alternating Row Colors for improved readability */
+.custom-table tbody tr:nth-child(even) td {
+    background-color: #f1f5f9;
+}
+
+.custom-table tbody tr:nth-child(odd) td {
+    background-color: #ffffff;
+}
+
+/* Hover Effect for Table Rows */
+.custom-table tbody tr:hover td {
+    background-color: #e3f2fd;
+    transition: background-color 0.3s ease-in-out;
+}
+
+
+/* --- Specific Styling for Learner Information Table --- */
+.learner-info-table th {
+    background-color: #3f51b5;
+    font-size: 1rem;
+    padding: 15px;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+    border-color: #303f9f;
+    text-transform: uppercase;
+}
+
+.learner-info-table td {
+    font-weight: bold;
+    background-color: #e8eaf6;
+    color: #1a237e;
+    padding: 12px;
+    font-size: 1.05rem;
+    white-space: normal;
+    word-break: break-word;
+    border-color: #c5cae9;
+    text-transform: none;
+}
+
+/* --- Specific Styling for Learner Performance Marks Table --- */
+.performance-marks-table th {
+    background-color: #00796b;
+    font-size: 0.9rem;
+    padding: 12px;
+    letter-spacing: 0.5px;
+    border-color: #004d40;
+    text-transform: uppercase;
+}
+
+.performance-marks-table td {
+    background-color: #e0f2f1;
+    color: #004d40;
+    padding: 10px;
+    font-weight: 600;
+    border-color: #b2dfdb;
+    text-transform: none;
+    white-space: nowrap;
+}
+/* Ensure the "-" in Math column is visible */
+.performance-marks-table td:empty::before {
+    content: "-";
+    color: #004d40;
+}
+
+
+/* Responsive Design */
+@media (max-width: 800px) {
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .logo {
+        margin-bottom: 10px;
+    }
+    /* Removed .print-button responsive styles */
+
+    .learner-performance {
+        margin: 10px auto;
+        padding: 15px 0;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .center-heading {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+
+    .section-title {
+        .section-title,
+  .attendance-title {
+    font-size: 1.25rem;
+  }
+
+    }
+
+    .table-container {
+        padding: 5px;
+        width: 100%;
+        max-width: none;
+    }
+
+    /* Adjust font sizes for all tables on smaller screens */
+    .custom-table,
+    .learner-info-table,
+    .performance-marks-table {
+        font-size: 0.7rem;
+        min-width: unset;
+    }
+
+    /* Adjust padding for all table cells on smaller screens */
+    .custom-table th,
+    .custom-table td,
+    .learner-info-table th,
+    .learner-info-table td,
+    .performance-marks-table th,
+    .performance-marks-table td {
+        padding: 6px;
+        word-break: break-word;
+    }
+
+    /* Ensure specific table cells allow wrapping */
+    .learner-info-table td,
+    .performance-marks-table td:nth-child(2),
+    .performance-marks-table td:nth-child(3) {
+        white-space: normal;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-size: 10pt;
+    }
+
+    
+    .logo {
+        display: block !important; /* Ensure logo is visible on print, if desired */
+        max-width: 140px; /* Smaller logo for print */
+        margin-bottom: 10px;
+    }
+    /* If you want to hide the logo on print, change 'display: block !important;' to 'display: none !important;' above. */
+
+
+    .learner-performance {
+        margin: 0;
+        padding: 10px;
+        box-shadow: none;
+        border-radius: 0;
+        min-height: unset;
+        background-color: white;
+    }
+
+    .table-container {
+        padding: 0;
+        max-width: 100%; /* Changed from 120% to 100% for safer print layout */
+        width: 100%;
+        overflow-x: visible;
+        display: block;
+    }
+
+    .custom-table,
+    .learner-info-table,
+    .performance-marks-table {
+        width: 100% !important;
+        margin: 10px 0;
+        box-shadow: none;
+        border-radius: 0;
+        page-break-inside: avoid;
+        border: 1px solid #ccc;
+        min-width: unset;
+    }
+
+    .custom-table th,
+    .custom-table td,
+    .learner-info-table th,
+    .learner-info-table td,
+    .performance-marks-table th,
+    .performance-marks-table td {
+        padding: 10px 10px;
+        font-size: 0.7rem;
+        border: 1px solid #ddd;
+        background-color: white !important;
+        color: black !important;
+        text-transform: none !important;
+        white-space: normal !important;
+    }
+
+    .custom-table th,
+    .learner-info-table th,
+    .performance-marks-table th {
+        background-color: #e0e0e0 !important;
+        color: black !important;
+    }
+
+    .center-heading, .section-title {
+        font-size: 1.2rem;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        color: black;
+        text-shadow: none;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+}
