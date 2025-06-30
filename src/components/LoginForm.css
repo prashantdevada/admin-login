@@ -16,15 +16,15 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  padding: 100px 20px;
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
-  padding: 100px;
 }
 
 /* === Card container === */
 .login-card {
   background-color: #f9f9fc;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 20px;
   width: 100%;
   max-width: 420px;
@@ -49,10 +49,17 @@
 }
 
 /* === Login title === */
-.login-title {
-  font-size: 1.8rem;
+.login-title.primary-title {
+  font-size: 2rem;
   font-weight: 750;
-  color: #003366;
+  color: #023d97;
+  margin-bottom: 15px;
+}
+
+.login-title.secondary-title {
+  color: #02962c;
+  font-size: 1.8rem;
+  font-weight: 600;
   margin-bottom: 10px;
   letter-spacing: 0.5px;
 }
@@ -74,7 +81,7 @@
 /* === Button styling === */
 .submit-button {
   width: 100%;
-  padding: 12px;
+  padding: 16px;
   font-size: 1.1rem;
   font-weight: 600;
   border-radius: 10px;
@@ -102,8 +109,9 @@
 
 .social-icons a {
   color: #495057;
-  font-size: 20px;
+  font-size: 24px;
   transition: all 0.3s ease;
+  padding: 12px;
 }
 
 .social-icons a:hover {
@@ -114,10 +122,11 @@
 /* === Form labels === */
 label {
   font-weight: 600;
-  color: #444;
+  color: #010212;
   text-align: left;
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
+  font-size: 1rem;
 }
 
 /* === Input with icon === */
@@ -132,11 +141,11 @@ label {
   left: 12px;
   transform: translateY(-50%);
   color: #888;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .input-with-icon .form-control {
-  padding-left: 40px;
+  padding-left: 42px;
 }
 
 .toggle-password {
@@ -146,5 +155,35 @@ label {
   transform: translateY(-50%);
   cursor: pointer;
   color: #888;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  padding: 10px;
+}
+
+/* === Responsive adjustments === */
+@media (max-width: 576px) {
+  .login-title.primary-title {
+    font-size: 1.6rem;
+  }
+
+  .login-title.secondary-title {
+    font-size: 1.4rem;
+  }
+
+  .submit-button {
+    font-size: 1rem;
+    padding: 14px;
+  }
+
+  .form-control {
+    font-size: 0.95rem;
+  }
+
+  label {
+    font-size: 0.95rem;
+  }
+
+  .social-icons a {
+    font-size: 20px;
+    padding: 10px;
+  }
 }

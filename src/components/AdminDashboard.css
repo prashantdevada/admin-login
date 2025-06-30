@@ -1,0 +1,143 @@
+/* === Container === */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 15px;
+}
+
+/* === Card Styling === */
+.card {
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+/* === Logo === */
+img[alt="Unacademy Logo"] {
+  max-height: 70px;
+  margin-bottom: 25px;
+}
+.centre-address {
+  font-size: 0.7rem;
+  color: #fb8a08;
+  margin-top: -7px;
+  margin-bottom: -15px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* === Titles === */
+/* Section headers inside gradient box */
+.section-title {
+  background: linear-gradient(to right, #011a66);
+  color: white;
+  font-weight: 500;
+  margin: auto;
+  width:auto, auto, auto;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+  padding: 1px 6px;
+  font-size: .9rem;  
+}
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #023d97;
+  margin-top: 10px;
+  text-align: center;
+}
+
+h5 {
+  font-weight: 700;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+/* === Table Styling === */
+.table {
+  font-size: 0.9rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th {
+  background-color: #007bff !important;
+  color: #fff !important;
+  font-weight: 600;
+  text-align: center;
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6;
+}
+
+/* === Search Section === */
+form .form-control {
+  max-width: 300px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+form .btn {
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 600;
+  background-color: #007bff;
+  border: none;
+}
+
+form .btn:hover {
+  background-color: #0056b3;
+}
+
+/* === Print Section === */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .report-print-wrapper,
+  .report-print-wrapper * {
+    visibility: visible;
+  }
+
+  .report-print-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .print-only-hide {
+    display: none !important;
+  }
+}
+
+/* === Responsive === */
+@media screen and (max-width: 768px) {
+  .table {
+    font-size: 0.75rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  form .form-control {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  form .btn {
+    width: 100%;
+  }
+}

@@ -1,3 +1,4 @@
+// LoginForm.jsx
 import React, { useState } from 'react';
 import { Container, Col, Form, Button, Card, Spinner } from 'react-bootstrap';
 import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -11,6 +12,7 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const navigate = useNavigate();
 
@@ -18,6 +20,24 @@ const LoginForm = () => {
     event.preventDefault();
     setLoading(true);
     setShowOverlay(true);
+
+    const adminCredentials = {
+      username: 'admin',
+      password: 'admin123'
+    };
+
+    if (isAdmin) {
+      if (username === adminCredentials.username && password === adminCredentials.password) {
+        setLoading(false);
+        setShowOverlay(false);
+        navigate('/adminDashboard');
+      } else {
+        alert('Invalid Admin credentials');
+        setLoading(false);
+        setShowOverlay(false);
+      }
+      return;
+    }
 
     fetch('https://sheetdb.io/api/v1/131pnl5khpeib')
       .then((response) => response.json())
@@ -64,19 +84,32 @@ const LoginForm = () => {
                 className="logo-image"
               />
 
-              <h1 className="login-title">AHMEDABAD CENTRE</h1>
-              <h2 className="login-title">Learner Login</h2>
+              <h1 className="login-title primary-title">AHMEDABAD CENTRE</h1>
+              <h2 className="login-title secondary-title">{isAdmin ? 'STAFF LOGIN' : 'LEARNER LOGIN'}</h2>
+
+              <div style={{ textAlign: 'center', marginBottom: '15px' }}>
+                <Form.Check
+                  type="switch"
+                  id="login-toggle"
+                  label={isAdmin ? 'Switch to Learner Login' : 'Switch to Staff Login'}
+                  checked={isAdmin}
+                  onChange={() => setIsAdmin(!isAdmin)}
+                />
+              </div>
 
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formUsername">
-                  <Form.Label>Roll Number</Form.Label>
+                  <Form.Label>{isAdmin ? 'Admin Username' : 'Roll Number'}</Form.Label>
                   <div className="input-with-icon">
                     <span className="icon"><FaUser /></span>
                     <Form.Control
                       type="text"
+                      inputMode={isAdmin ? 'text' : 'numeric'}
+                      autoComplete="username"
+                      autoFocus
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
-                      placeholder="Enter your Roll Number"
+                      placeholder={isAdmin ? 'Enter Staff Username' : 'Enter your Roll Number'}
                       required
                     />
                   </div>
@@ -88,6 +121,7 @@ const LoginForm = () => {
                     <span className="icon"><FaLock /></span>
                     <Form.Control
                       type={showPassword ? 'text' : 'password'}
+                      autoComplete="current-password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter your password"
@@ -116,24 +150,25 @@ const LoginForm = () => {
                   )}
                 </Button>
 
-                {/* Social Icons */}
-                <div className="social-icons mt-4">
-                  <a href="https://www.facebook.com/unacademyahmedabad/" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                  <a href="https://www.youtube.com/@UnacademyNEET" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-youtube"></i>
-                  </a>
-                  <a href="https://twitter.com/unacademy" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                  <a href="https://www.instagram.com/unacademy.ahmedabad/" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                  <a href="https://www.linkedin.com/company/unacademy" target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-linkedin-in"></i>
-                  </a>
-                </div>
+                {!isAdmin && (
+                  <div className="social-icons mt-4">
+                    <a href="https://www.facebook.com/unacademyahmedabad/" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@UnacademyNEET" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://twitter.com/unacademy" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com/unacademy.ahmedabad/" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/company/unacademy" target="_blank" rel="noopener noreferrer">
+                      <i className="fab fa-linkedin-in"></i>
+                    </a>
+                  </div>
+                )}
               </Form>
             </Card.Body>
           </Card>
