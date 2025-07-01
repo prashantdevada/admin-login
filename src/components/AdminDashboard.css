@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /* === Container === */
 .container {
   max-width: 1000px;
@@ -142,10 +142,10 @@ form .btn:hover {
     width: 100%;
   }
 }
-=======
+
 /* === Container === */
 .container {
-  max-width: 1000px;
+ max-width: 1000px;
   margin: auto;
   padding: 15px;
 }
@@ -286,4 +286,3 @@ form .btn:hover {
     width: 100%;
   }
 }
->>>>>>> 0530117ee37ea8760e5e49554fa7de702d58a2e4

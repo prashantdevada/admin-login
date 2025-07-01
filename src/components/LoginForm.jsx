@@ -1,12 +1,7 @@
 // LoginForm.jsx
 import React, { useState } from 'react';
-<<<<<<< HEAD
 import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Container, Col, Form, Button, Card, Spinner } from 'react-bootstrap';
-=======
-import { Container, Col, Form, Button, Card, Spinner } from 'react-bootstrap';
-import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
->>>>>>> 0530117ee37ea8760e5e49554fa7de702d58a2e4
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './LoginForm.css';
 import { useNavigate } from 'react-router-dom';
