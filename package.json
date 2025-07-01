@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   
+=======
+  "react-icons": "^4.12.0"
+>>>>>>> 0530117ee37ea8760e5e49554fa7de702d58a2e4
   "name": "learnerapp",
   
   "version": "0.1.0",
