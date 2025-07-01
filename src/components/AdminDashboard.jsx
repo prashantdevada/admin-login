@@ -163,4 +163,5 @@ const AdminDashboard = () => {
       </Card>
     </Container>
   );
-}                                                                                                                                                                                                                                                                                                                                  
+}                              
+export default AdminDashboard;                                                                                                                                                                                                                                                                      
