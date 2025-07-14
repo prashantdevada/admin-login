@@ -1,44 +1,68 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import './learnerperformance.css'; // Ensure this path is correct
+import React, { useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Container, Card, Table, Button } from 'react-bootstrap';
+import './LearnerPerformance.css';
 
 const LearnerPerformance = () => {
   const location = useLocation();
-  const learnerData = location.state?.learnerData; // Access learner data passed via state
+  const navigate = useNavigate();
+  const learnerData = location.state?.learnerData;
+  const reportRef = useRef();
 
   if (!learnerData || learnerData.length === 0) {
-    return <div className="no-data-message">No data available. Please navigate from the dashboard.</div>;
+    return (
+      <Container className="mt-5 text-center">
+        <Card className="p-4 shadow-sm">
+          <div className="text-danger">No data available. Please navigate from the dashboard.</div>
+        </Card>
+      </Container>
+    );
   }
 
-  const learnerInfo = learnerData[0]; // Assuming all rows belong to the same learner for the info section
+  const learnerInfo = learnerData[0];
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
 
   return (
-    <>
-      {/* Header Container for Logo - now only for centering the logo */}
-      <div className="header-container">
-        <img
-        src="https://v.fastcdn.co/u/67ec1086/61513884-0-Unacademy-Logo-RGB.png" // Your logo URL
-          alt="Unacademy Logo"
-          className="logo" // This correctly applies the CSS class
-        />
-        {/* Print button removed as requested */}
-      </div>
+    <Container className="mt-5 text-center">
+      <Card className="p-4 shadow-sm">
 
-      {/* "Ahmedabad Centre" Heading */}
-      <h1 className="center-heading">AHMEDABAD CENTRE</h1>
+        {/* Logout & Print Buttons */}
+        <div className="d-flex justify-content-between mb-3 print-only-hide">
+          <Button variant="outline-danger" onClick={handleLogout}>
+            🚪 Logout
+          </Button>
+          <Button variant="secondary" onClick={() => window.print()}>
+            🖨️ Print Report
+          </Button>
+        </div>
 
-      <div className="learner-performance"> {/* Main report content container */}
-        {/* Learner Information Section */}
-        <h2 className="section-title">LEARNER INFORMATION</h2>
-        <div className="table-container">
-          <table className="custom-table learner-info-table">
-            <thead>
+        <div ref={reportRef} className="report-print-wrapper">
+
+          <div className="text-center mb-4">
+            <img
+              src="https://v.fastcdn.co/u/67ec1086/61513884-0-Unacademy-Logo-RGB.png"
+              alt="Unacademy Logo"
+              style={{ height: '60px' }}
+            />
+            <h2 className="mt-3">AHMEDABAD CENTRE</h2>
+            <p className="centre-address">
+              Address: 1st and 2nd floor, Zion Z1, Sindhu Bhavan Marg, near Maple County Road, Bodakdev, Ahmedabad, Gujarat 380054
+            </p>
+          </div>
+
+          <div className="section-title">Learner Information</div>
+          <Table bordered hover responsive size="sm" className="text-center table-bordered table-striped">
+            <thead className="table-primary">
               <tr>
-                <th>LEARNER NAME</th>
-                <th>BATCH NAME</th>
-                <th>ROLL NUMBER</th>
-                <th>CONTACT NUMBER</th>
-                <th>SESSION</th>
+                <th>Learner Name</th>
+                <th>Batch Name</th>
+                <th>Roll No</th>
+                <th>Contact No</th>
+                <th>Session</th>
               </tr>
             </thead>
             <tbody>
@@ -46,36 +70,24 @@ const LearnerPerformance = () => {
                 <td>{learnerInfo['Student Name']}</td>
                 <td>{learnerInfo.Batch}</td>
                 <td>{learnerInfo.RollNo}</td>
-                <td>{learnerInfo.Password}</td> {/* Confirm 'Password' is actually Contact Number data */}
-                <td>Session : 2025-26</td>
+                <td>{learnerInfo['Contact No']}</td>
+                <td>2025-26</td>
               </tr>
             </tbody>
-          </table>
-        </div>
+          </Table>
 
- {/* Learner Attendance Report Section */}
-<h4 className="attendance-title">ATTENDANCE REPORT 2025-26</h4>
-        <div className="table-container">
-          <table className="custom-table performance-marks-table">
-              <thead>
+          <div className="section-title">Attendance Report 2025-26</div>
+          <Table bordered hover responsive size="sm" className="text-center table-bordered">
+            <thead className="table-success">
               <tr>
-                <th>APR</th>
-                <th>MAY</th>
-                <th>JUN</th>
-                <th>JUL</th>
-                <th>AUG</th>
-                <th>SEP</th>
-                <th>OCT</th>
-                <th>NOV</th>
-                <th>DEC</th>
-                <th>JAN</th>
-                <th>FEB</th>
-                <th>MAR</th>
-            </tr>
+                <th>APR</th><th>MAY</th><th>JUN</th><th>JUL</th>
+                <th>AUG</th><th>SEP</th><th>OCT</th><th>NOV</th>
+                <th>DEC</th><th>JAN</th><th>FEB</th><th>MAR</th>
+              </tr>
             </thead>
             <tbody>
               <tr>
-                <td>{learnerInfo.APR}</td>                             
+                <td>{learnerInfo.APR}</td>
                 <td>{learnerInfo.MAY}</td>
                 <td>{learnerInfo.JUN}</td>
                 <td>{learnerInfo.JUL}</td>
@@ -86,17 +98,14 @@ const LearnerPerformance = () => {
                 <td>{learnerInfo.DEC}</td>
                 <td>{learnerInfo.JAN}</td>
                 <td>{learnerInfo.FEB}</td>
-                <td>{learnerInfo.MAR}</td>                
+                <td>{learnerInfo.MAR}</td>
               </tr>
             </tbody>
-          </table>
-        </div>        
-        
-{/* Learner Performance Report Section */}
-        <h2 className="section-title">LEARNER PERFORMANCE REPORT</h2>
-        <div className="table-container">
-          <table className="custom-table performance-marks-table">
-            <thead>
+          </Table>
+
+          <div className="section-title">Learner Performance Report</div>
+          <Table bordered hover responsive size="sm" className="text-center table-bordered table-striped">
+            <thead className="table-warning">
               <tr>
                 <th>S.NO.</th>
                 <th>EXAM DATE</th>
@@ -112,27 +121,27 @@ const LearnerPerformance = () => {
               </tr>
             </thead>
             <tbody>
-              {learnerData.map((learner, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
+              {learnerData.map((learner, idx) => (
+                <tr key={idx}>
+                  <td>{idx + 1}</td>
                   <td>{learner['Exam Date']}</td>
                   <td>{learner['TestName']}</td>
-                  <td>{learner.Phy}</td>
-                  <td>{learner.Chem}</td>
-                  <td>{learner.Math}</td>
-                  <td>{learner.Bio}</td>
-                  <td>{learner.Total}</td>
+                  <td>{learner['Phy']}</td>
+                  <td>{learner['Chem']}</td>
+                  <td>{learner['Math']}</td>
+                  <td>{learner['Bio']}</td>
+                  <td>{learner['Total']}</td>
                   <td>{learner['%AGE']}</td>
-                  <td>{learner.Rank}</td>
+                  <td>{learner['Rank']}</td>
                   <td>{learner['Max. Marks']}</td>
                 </tr>
               ))}
             </tbody>
-          </table>
+          </Table>
+
         </div>
-      </div>
-    
-    </>
+      </Card>
+    </Container>
   );
 };
 

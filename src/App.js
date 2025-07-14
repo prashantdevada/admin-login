@@ -1,19 +1,17 @@
-// import FetchDataComponent from "./components/FetchDataComponent";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 import LearnerPerformance from "./components/LearnerPerformance";
-import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
 import AdminDashboard from './components/AdminDashboard';
-
-
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LoginForm/>}/>
-        <Route path="/learnerPerformance" element={<LearnerPerformance/>}/>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/learnerPerformance" element={<LearnerPerformance />} />
         <Route path="/adminDashboard" element={<AdminDashboard />} />
-        </Routes>
+      </Routes>
     </Router>
   );
 }

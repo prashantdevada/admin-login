@@ -1,5 +1,5 @@
-// AdminDashboard.jsx
 import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Card, Button, Table, Form, Spinner } from 'react-bootstrap';
 import './AdminDashboard.css';
 
@@ -8,6 +8,7 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [searchRollNo, setSearchRollNo] = useState('');
   const reportRef = useRef();
+  const navigate = useNavigate();
 
   const handleSearch = () => {
     if (!searchRollNo) return;
@@ -27,9 +28,19 @@ const AdminDashboard = () => {
       });
   };
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();  // optional if using token storage
+    navigate('/login');
+  };
+
   return (
     <Container className="mt-5 text-center">
       <Card className="p-4 shadow-sm">
+
         <Form className="d-flex justify-content-center mb-4 print-only-hide">
           <Form.Control
             type="text"
@@ -40,6 +51,13 @@ const AdminDashboard = () => {
           />
           <Button variant="primary" onClick={handleSearch}>🔍 Search</Button>
         </Form>
+
+        {filteredLearners.length > 0 && (
+          <div className="d-flex justify-content-between mb-3 print-only-hide">
+            <Button variant="outline-primary" onClick={handleRefresh}>🔄 Refresh</Button>
+            <Button variant="outline-danger" onClick={handleLogout}>🚪 Logout</Button>
+          </div>
+        )}
 
         {loading ? (
           <div className="text-center">
@@ -64,7 +82,7 @@ const AdminDashboard = () => {
                 />
                 <h2 className="mt-3">AHMEDABAD CENTRE</h2>
                 <p className="centre-address">
-                Address: 1st and 2nd floor, Zion Z1, Sindhu Bhavan Marg, near Maple County Road, Bodakdev, Ahmedabad, Gujarat 380054
+                  Address: 1st and 2nd floor, Zion Z1, Sindhu Bhavan Marg, near Maple County Road, Bodakdev, Ahmedabad, Gujarat 380054
                 </p>
               </div>
 
@@ -163,5 +181,6 @@ const AdminDashboard = () => {
       </Card>
     </Container>
   );
-}                              
-export default AdminDashboard;                                                                                                                                                                                                                                                                      
+};
+
+export default AdminDashboard;
