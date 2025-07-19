@@ -126,12 +126,7 @@
                       placeholder="Enter your password"
                       required
                     />
-                    <span
-                      className="toggle-password"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </span>
+                    
                   </div>
                 </Form.Group>
 
