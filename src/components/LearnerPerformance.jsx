@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Card, Table, Button } from 'react-bootstrap';
 import './LearnerPerformance.css';
@@ -8,6 +8,13 @@ const LearnerPerformance = () => {
   const navigate = useNavigate();
   const learnerData = location.state?.learnerData;
   const reportRef = useRef();
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (!isLoggedIn) {
+      navigate('/login', { replace: true });
+    }
+  }, [navigate]);
 
   if (!learnerData || learnerData.length === 0) {
     return (
@@ -23,25 +30,19 @@ const LearnerPerformance = () => {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate('/login');
+    navigate('/login', { replace: true });
+    window.location.reload();   // Optional: Force reload to prevent cached history
   };
 
   return (
     <Container className="mt-5 text-center">
       <Card className="p-4 shadow-sm">
-
-        {/* Logout & Print Buttons */}
         <div className="d-flex justify-content-between mb-3 print-only-hide">
-          <Button variant="outline-danger" onClick={handleLogout}>
-            🚪 Logout
-          </Button>
-          <Button variant="secondary" onClick={() => window.print()}>
-            🖨️ Print Report
-          </Button>
+          <Button variant="outline-danger" onClick={handleLogout}>🚪 Logout</Button>
+          <Button variant="secondary" onClick={() => window.print()}>🖨️ Print Report</Button>
         </div>
 
         <div ref={reportRef} className="report-print-wrapper">
-
           <div className="text-center mb-4">
             <img
               src="https://v.fastcdn.co/u/67ec1086/61513884-0-Unacademy-Logo-RGB.png"
@@ -138,7 +139,6 @@ const LearnerPerformance = () => {
               ))}
             </tbody>
           </Table>
-
         </div>
       </Card>
     </Container>
