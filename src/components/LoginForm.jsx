@@ -109,15 +109,14 @@ const LoginForm = () => {
                       autoFocus
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
-                      placeholder={isAdmin ? 'Enter Staff Username' : 'Enter your Roll Number'}
+                      placeholder={isAdmin ? 'Enter Staff Username' : 'Unacademy Roll Number'}
                       required
                     />
                   </div>
                 </Form.Group>
 
                 <Form.Group controlId="formPassword" className="mt-3">
-                  <Form.Label>Password</Form.Label>
-                  <div className="input-with-icon">
+                <div className="input-with-icon">
                     <span className="icon"><FaLock /></span>
                     <Form.Control
                       type={showPassword ? 'text' : 'password'}
