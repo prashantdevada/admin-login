@@ -27,7 +27,7 @@ const LoginForm = () => {
 
     if (isAdmin) {
       if (username === adminCredentials.username && password === adminCredentials.password) {
-        localStorage.setItem('isLoggedIn', 'true');  // ✅ track admin session
+        localStorage.setItem('isLoggedIn', 'true');
         setLoading(false);
         setShowOverlay(false);
         navigate('/adminDashboard', { state: { isAuthenticated: true }, replace: true });
@@ -54,7 +54,7 @@ const LoginForm = () => {
         );
 
         if (filteredLearners.length > 0) {
-          localStorage.setItem('isLoggedIn', 'true'); // ✅ track learner session
+          localStorage.setItem('isLoggedIn', 'true');
           setLoading(false);
           setShowOverlay(false);
           navigate('/learnerPerformance', { state: { learnerData: filteredLearners }, replace: true });
@@ -76,7 +76,7 @@ const LoginForm = () => {
       {showOverlay && <div className="overlay"></div>}
 
       <Container fluid className="login-container">
-        <Col md={5} lg={4}>
+        <Col xs={12} sm={8} md={6} lg={4}>
           <Card className="login-card">
             <Card.Body>
               <img
@@ -88,7 +88,7 @@ const LoginForm = () => {
               <h1 className="login-title primary-title">AHMEDABAD CENTRE</h1>
               <h2 className="login-title secondary-title">{isAdmin ? 'STAFF LOGIN' : 'LEARNER LOGIN'}</h2>
 
-              <div style={{ textAlign: 'center', marginBottom: '15px' }}>
+              <div className="text-center mb-3">
                 <Form.Check
                   type="switch"
                   id="login-toggle"
@@ -99,35 +99,31 @@ const LoginForm = () => {
               </div>
 
               <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formUsername">
-                  <div className="input-with-icon">
-                    <span className="icon"><FaUser /></span>
-                    <Form.Control
-                      type="text"
-                      inputMode={isAdmin ? 'text' : 'numeric'}
-                      autoComplete="username"
-                      autoFocus
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      placeholder={isAdmin ? 'Enter Staff Username' : 'Unacademy Roll Number'}
-                      required
-                    />
-                  </div>
-                </Form.Group>
-
-                <Form.Group controlId="formPassword" className="mt-3">
                 <div className="input-with-icon">
-                    <span className="icon"><FaLock /></span>
-                    <Form.Control
-                      type={showPassword ? 'text' : 'password'}
-                      autoComplete="current-password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Enter your password"
-                      required
-                    />
-                  </div>
-                </Form.Group>
+                  <FaUser className="icon" />
+                  <Form.Control
+                    type="text"
+                    inputMode={isAdmin ? 'text' : 'numeric'}
+                    autoComplete="username"
+                    autoFocus
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder={isAdmin ? 'Enter Staff Username' : 'Unacademy Roll Number'}
+                    required
+                  />
+                </div>
+
+                <div className="input-with-icon mt-3 position-relative">
+                  <FaLock className="icon" />
+                  <Form.Control
+                    type={showPassword ? 'text' : 'password'}
+                    autoComplete="current-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your password"
+                    required
+                  />
+                </div>
 
                 <Button
                   type="submit"
