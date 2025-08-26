@@ -39,7 +39,7 @@ const LoginForm = () => {
       return;
     }
 
-    fetch('https://sheetdb.io/api/v1/131pnl5khpeib')
+    fetch('https://sheetdb.io/api/v1/lguxn22cung7r?ignore_cache=1')
       .then((response) => response.json())
       .then((data) => {
         const trimmedUsername = username.trim();
