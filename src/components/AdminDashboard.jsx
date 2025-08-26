@@ -20,7 +20,7 @@ const AdminDashboard = () => {
   const handleSearch = () => {
     if (!searchRollNo) return;
     setLoading(true);
-    fetch('https://sheetdb.io/api/v1/131pnl5khpeib')
+    fetch('https://sheetdb.io/api/v1/cw1y0c79q17zk?ignore_cache=1')
       .then((res) => res.json())
       .then((data) => {
         const filtered = data.filter(
