@@ -16,16 +16,16 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 60px 20px;
+  padding: 90px 30px;
 }
 
 /* === Card container === */
 .login-card {
   background-color: #cbe3fa;
-  padding: 1rem;
+  padding: 0.8rem;
   border-radius: 20px;
   width: 100%;
-  max-width: 400px;     /* constrained width on desktop */
+  max-width: 420px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
   text-align: center;
 }
@@ -34,23 +34,23 @@
 .logo-image {
   display: block;
   margin: 0 auto 20px;
-  max-width: 180px;
+  max-width: 200px;
   height: auto;
   animation: float 3s ease-in-out infinite;
   filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
 }
-
 /* === Titles === */
 .login-title.primary-title {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 900;
   color: #023d97;
-  margin-bottom: 12px;
+  font-size: 2rem;
+  margin-bottom: 15px;
 }
 
 .login-title.secondary-title {
   color: #0e0156;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: 900;
   margin-bottom: 15px;
 }
@@ -60,7 +60,7 @@ label {
   font-weight: 600;
   color: #470202;
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   font-size: 0.9rem;
   text-align: left;
 }
@@ -80,9 +80,9 @@ label {
 }
 
 .input-with-icon .form-control {
-  width: 100%;
+  max-width: 500px;
   border-radius: 10px;
-  padding: 10px 10px 10px 40px;
+  padding: 8px 8px 8px 40px;
   font-size: 1rem;
   border: 1px solid #9e9e9f;
   box-sizing: border-box;
@@ -96,8 +96,8 @@ label {
 /* === Button styling === */
 .submit-button {
   width: 100%;
-  padding: 14px;
-  font-size: 1rem;
+  padding: 16px;
+  font-size: 1.1rem;
   font-weight: 600;
   border-radius: 10px;
   border: none;
@@ -110,7 +110,7 @@ label {
 
 .submit-button:hover {
   background: linear-gradient(45deg, #0056b3, #0096c7);
-  transform: translateY(-1px);
+  transform: translateY(2px);
 }
 
 /* === Social icons === */
@@ -118,12 +118,12 @@ label {
   margin-top: 15px;
   display: flex;
   justify-content: center;
-  gap: 25px;
+  gap: 15px;
 }
 
 .social-icons a {
   color: #0c0865;
-  font-size: 22px;
+  font-size: 24px;
   transition: all 0.3s ease;
 }
 
@@ -135,30 +135,29 @@ label {
 /* === Responsive adjustments === */
 @media (max-width: 576px) {
   .logo-image {
-    max-width: 150px;
-    margin-bottom: 15px;
+    max-width: 180px;
+    margin-bottom: 12px;
   }
 
   .login-title.primary-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
   .login-title.secondary-title {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   .submit-button {
-    font-size: 0.95rem;
-    padding: 12px;
+    font-size: 1rem;
+    padding: 14px;
   }
 
   .form-control {
-    font-size: 0.9rem;
-    padding: 8px 8px 8px 38px;
+    font-size: 0.95rem;
   }
 
   label {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
   }
 
   .social-icons a {
