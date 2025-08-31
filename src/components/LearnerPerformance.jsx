@@ -34,6 +34,11 @@ const LearnerPerformance = () => {
     window.location.reload();
   };
 
+  // GitHub repo base URL for learner photos
+  const GITHUB_USERNAME = "prashantdevada";
+  const GITHUB_BASE_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/learner-photos/main/photos`;
+  const photoURL = `${GITHUB_BASE_URL}/${learnerInfo.RollNo}.jpeg`;
+
   return (
     <Container className="mt-4 mb-5 text-center">
       <Card className="p-3 p-md-4 shadow-sm">
@@ -55,28 +60,37 @@ const LearnerPerformance = () => {
             </p>
           </div>
 
+          {/* Learner Info Table */}
           <div className="section-title">Learner Information</div>
           <div className="table-responsive">
-            <Table bordered hover size="sm" className="text-center table-bordered table-striped">
-              <thead className="table-primary">
-                <tr>
-                  <th>Learner Name</th>
-                  <th>Batch Name</th>
-                  <th>Roll No</th>
-                  <th>Contact No</th>
-                  <th>Session</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{learnerInfo['Student Name']}</td>
-                  <td>{learnerInfo.Batch}</td>
-                  <td>{learnerInfo.RollNo}</td>
-                  <td>{learnerInfo['Contact No']}</td>
-                  <td>2025-26</td>
-                </tr>
-              </tbody>
-            </Table>
+            <Table bordered hover size="sm" className="text-center learner-info-table">
+  <thead>
+    <tr>
+      <th>Learner Name</th>
+      <th>Batch Name</th>
+      <th>Roll No</th>
+      <th>Contact No</th>
+      <th>Session</th>
+      <th>Learner Photo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{learnerInfo['Student Name']}</td>
+      <td>{learnerInfo.Batch}</td>
+      <td>{learnerInfo.RollNo}</td>
+      <td>{learnerInfo['Contact No']}</td>
+      <td>2025-26</td>
+      <td className="learner-photo-cell">
+        <img
+          src={photoURL}
+          alt="Learner"
+          onError={(e) => e.currentTarget.src = "https://via.placeholder.com/80x100?text=No+Photo"}
+        />
+      </td>
+    </tr>
+  </tbody>
+</Table>
           </div>
 
           <div className="section-title mt-4">Attendance Report 2025-26</div>
