@@ -69,19 +69,41 @@ body {
     margin-bottom: 20px;
 }
 
-/* Base Table Styling */
-.custom-table, .learner-info-table, .performance-marks-table {
-    width: 100%;
-    background-color: #ffffff;
-    border-collapse: collapse;
-    text-align: center;
-    font-size: 0.9rem;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    overflow: hidden;
-    min-width: 600px;
+/* General Table Fix */
+.table-bordered th, 
+.table-bordered td {
+  padding: 8px !important;
+  vertical-align: middle;
 }
 
+/* Learner Info Table — compact like Attendance Report */
+.learner-info-table {
+    border-collapse: collapse !important;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.learner-info-table th,
+.learner-info-table td {
+    padding: 8px !important;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #ccc !important;
+    white-space: nowrap;
+}
+
+/* Learner Photo inside Info Table */
+.learner-info-table .learner-photo-cell img {
+    width: 90px;
+    height: 100px;
+    object-fit: cover;
+    border: 2px solid #121cdb;
+    border-radius: 6px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Custom Tables */
 .custom-table th, .learner-info-table th, .performance-marks-table th {
     color: white;
     font-weight: 600;
@@ -100,20 +122,18 @@ body {
     white-space: nowrap;
 }
 
+/* Table Colors */
 .custom-table tbody tr:nth-child(even) td {
     background-color: #f1f5f9;
 }
-
 .custom-table tbody tr:nth-child(odd) td {
     background-color: #ffffff;
 }
-
 .custom-table tbody tr:hover td {
     background-color: #e3f2fd;
     transition: background-color 0.3s ease-in-out;
 }
 
-/* Specific Table Header Colors */
 .learner-info-table th { background-color: #3f51b5; }
 .performance-marks-table th { background-color: #00796b; }
 .custom-table th { background-color: #ff9800; }
