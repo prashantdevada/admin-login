@@ -40,6 +40,11 @@ const AdminDashboard = () => {
     navigate('/login', { replace: true });
   };
 
+  // Generate photo URL from GitHub repo
+  const getPhotoURL = (rollNo) => {
+    return `https://raw.githubusercontent.com/prashantdevada/learner-photos/main/photos/${rollNo}.jpeg`;
+  };
+
   return (
     <Container className="mt-5 text-center">
       <Card className="p-4 shadow-sm">
@@ -48,16 +53,19 @@ const AdminDashboard = () => {
           <Button variant="outline-danger" onClick={handleLogout}>🚪 Logout</Button>
         </div>
 
-        <Form className="d-flex justify-content-center mb-4 print-only-hide">
-          <Form.Control
-            type="text"
-            placeholder="Unacademy Roll Number"
-            value={searchRollNo}
-            onChange={(e) => setSearchRollNo(e.target.value)}
-            className="me-3 w-50 text-center"
-          />
-          <Button variant="primary" onClick={handleSearch}>🔍 Search</Button>
-        </Form>
+        <Form className="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-2 mb-4 print-only-hide">
+  <Form.Control
+    type="text"
+    placeholder="Unacademy Roll Number"
+    value={searchRollNo}
+    onChange={(e) => setSearchRollNo(e.target.value)}
+    className="text-center"
+    style={{ maxWidth: '280px' }}
+  />
+  <Button variant="primary" onClick={handleSearch}>
+    🔍 Search
+  </Button>
+</Form>
 
         {loading ? (
           <div className="text-center">
@@ -74,19 +82,20 @@ const AdminDashboard = () => {
                 />
                 <h2 className="mt-3">AHMEDABAD CENTRE</h2>
                 <p className="centre-address">
-              Address: 1st and 2nd floor, Zion Z1, Sindhu Bhavan Marg, Near Maple County Road, Bodakdev, Ahmedabad, Gujarat 380054
-            </p>
+                  Address: 1st and 2nd floor, Zion Z1, Sindhu Bhavan Marg, Near Maple County Road, Bodakdev, Ahmedabad, Gujarat 380054
+                </p>
               </div>
 
               <div className="section-title">Learner Information</div>
-              <Table bordered hover responsive size="sm" className="text-center table-bordered table-striped">
-                <thead className="table-primary">
+              <Table bordered hover responsive size="sm" className="text-center learner-info-table">
+                <thead>
                   <tr>
                     <th>Learner Name</th>
                     <th>Batch Name</th>
                     <th>Roll No</th>
                     <th>Contact No</th>
                     <th>Session</th>
+                    <th>Learner Photo</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -96,6 +105,13 @@ const AdminDashboard = () => {
                     <td>{filteredLearners[0].RollNo}</td>
                     <td>{filteredLearners[0]["Contact No"]}</td>
                     <td>2025-26</td>
+                    <td className="learner-photo-cell">
+                      <img
+                        src={getPhotoURL(filteredLearners[0].RollNo)}
+                        alt="Learner"
+                        onError={(e) => e.currentTarget.src = "https://via.placeholder.com/80x100?text=No+Photo"}
+                      />
+                    </td>
                   </tr>
                 </tbody>
               </Table>
