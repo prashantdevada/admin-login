@@ -34,7 +34,10 @@ const LearnerPerformance = () => {
     window.location.reload();
   };
 
-  // GitHub repo base URL for learner photos
+  // GitHub repo base URL for OMR + Answer Keys
+  const OMR_BASE_URL = "https://raw.githubusercontent.com/prashantdevada/OMR-KEY/main/OMR-KEY";
+
+  // Learner photo GitHub repo
   const GITHUB_USERNAME = "prashantdevada";
   const GITHUB_BASE_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/learner-photos/main/photos`;
   const photoURL = `${GITHUB_BASE_URL}/${learnerInfo.RollNo}.jpeg`;
@@ -64,35 +67,36 @@ const LearnerPerformance = () => {
           <div className="section-title">Learner Information</div>
           <div className="table-responsive">
             <Table bordered hover size="sm" className="text-center learner-info-table">
-  <thead>
-    <tr>
-      <th>Learner Name</th>
-      <th>Batch Name</th>
-      <th>Roll No</th>
-      <th>Contact No</th>
-      <th>Session</th>
-      <th>Learner Photo</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{learnerInfo['Student Name']}</td>
-      <td>{learnerInfo.Batch}</td>
-      <td>{learnerInfo.RollNo}</td>
-      <td>{learnerInfo['Contact No']}</td>
-      <td>2025-26</td>
-      <td className="learner-photo-cell">
-        <img
-          src={photoURL}
-          alt="Learner"
-          onError={(e) => e.currentTarget.src = "https://via.placeholder.com/80x100?text=No+Photo"}
-        />
-      </td>
-    </tr>
-  </tbody>
-</Table>
+              <thead>
+                <tr>
+                  <th>Learner Name</th>
+                  <th>Batch Name</th>
+                  <th>Roll No</th>
+                  <th>Contact No</th>
+                  <th>Session</th>
+                  <th>Learner Photo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{learnerInfo['Student Name']}</td>
+                  <td>{learnerInfo.Batch}</td>
+                  <td>{learnerInfo.RollNo}</td>
+                  <td>{learnerInfo['Contact No']}</td>
+                  <td>2025-26</td>
+                  <td className="learner-photo-cell">
+                    <img
+                      src={photoURL}
+                      alt="Learner"
+                      onError={(e) => e.currentTarget.src = "https://via.placeholder.com/80x100?text=No+Photo"}
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
           </div>
 
+          {/* Attendance */}
           <div className="section-title mt-4">Attendance Report 2025-26</div>
           <div className="table-responsive">
             <Table bordered hover size="sm" className="text-center table-bordered">
@@ -122,6 +126,7 @@ const LearnerPerformance = () => {
             </Table>
           </div>
 
+          {/* Performance */}
           <div className="section-title mt-4">Learner Performance Report</div>
           <div className="table-responsive">
             <Table bordered hover size="sm" className="text-center table-bordered table-striped">
@@ -141,21 +146,33 @@ const LearnerPerformance = () => {
                 </tr>
               </thead>
               <tbody>
-                {learnerData.map((learner, idx) => (
-                  <tr key={idx}>
-                    <td>{idx + 1}</td>
-                    <td>{learner['Exam Date']}</td>
-                    <td>{learner['TestName']}</td>
-                    <td>{learner['Phy']}</td>
-                    <td>{learner['Chem']}</td>
-                    <td>{learner['Math']}</td>
-                    <td>{learner['Bio']}</td>
-                    <td>{learner['Total']}</td>
-                    <td>{learner['%AGE']}</td>
-                    <td>{learner['Rank']}</td>
-                    <td>{learner['Max. Marks']}</td>
-                  </tr>
-                ))}
+                {learnerData.map((learner, idx) => {
+                  const omrUrl = `${OMR_BASE_URL}/${learner.TestID}_${learner.RollNo}.jpg`;
+                  const keyUrl = `${OMR_BASE_URL}/${learner.TestID}.pdf`;
+                  return (
+                    <tr key={idx}>
+                      <td>{idx + 1}</td>
+                      <td>{learner['Exam Date']}</td>
+                      <td>
+                        <a href={omrUrl} target="_blank" rel="noopener noreferrer">
+                          {learner['TestName']}
+                        </a>
+                        <br />
+                        <a href={keyUrl} target="_blank" rel="noopener noreferrer" className="small text-muted">
+                          [Answer Key]
+                        </a>
+                      </td>
+                      <td>{learner['Phy']}</td>
+                      <td>{learner['Chem']}</td>
+                      <td>{learner['Math']}</td>
+                      <td>{learner['Bio']}</td>
+                      <td>{learner['Total']}</td>
+                      <td>{learner['%AGE']}</td>
+                      <td>{learner['Rank']}</td>
+                      <td>{learner['Max. Marks']}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </Table>
           </div>
