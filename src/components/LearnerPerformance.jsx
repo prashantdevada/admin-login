@@ -143,6 +143,8 @@ const LearnerPerformance = () => {
                   <th>%AGE</th>
                   <th>RANK</th>
                   <th>MAX. MARKS</th>
+                  <th>OMR</th>
+                  <th>Key</th>
                 </tr>
               </thead>
               <tbody>
@@ -153,15 +155,7 @@ const LearnerPerformance = () => {
                     <tr key={idx}>
                       <td>{idx + 1}</td>
                       <td>{learner['Exam Date']}</td>
-                      <td>
-                        <a href={omrUrl} target="_blank" rel="noopener noreferrer">
-                          {learner['TestName']}
-                        </a>
-                        <br />
-                        <a href={keyUrl} target="_blank" rel="noopener noreferrer" className="small text-muted">
-                          [Answer Key]
-                        </a>
-                      </td>
+                      <td>{learner['TestName']}</td>
                       <td>{learner['Phy']}</td>
                       <td>{learner['Chem']}</td>
                       <td>{learner['Math']}</td>
@@ -170,6 +164,30 @@ const LearnerPerformance = () => {
                       <td>{learner['%AGE']}</td>
                       <td>{learner['Rank']}</td>
                       <td>{learner['Max. Marks']}</td>
+                      <td>
+                        <Button
+                          variant="primary"
+                          size="sm"
+                          className="rounded-pill omr-btn"
+                          href={omrUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          📝
+                        </Button>
+                      </td>
+                      <td>
+                        <Button
+                          variant="success"
+                          size="sm"
+                          className="rounded-pill key-btn"
+                          href={keyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          📑
+                        </Button>
+                      </td>
                     </tr>
                   );
                 })}
