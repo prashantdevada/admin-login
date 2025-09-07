@@ -127,7 +127,7 @@ const LoginForm = () => {
 
                 <Button
                   type="submit"
-                  className="submit-button mt-4"
+                  className="submit-button mt-1"
                   disabled={loading}
                 >
                   {loading ? (
