@@ -97,7 +97,7 @@ body {
     width: 90px;
     height: 100px;
     object-fit: cover;
-    border: 2px solid #121cdb;
+    border: 2px solid #010cde;
     border-radius: 6px;
     display: block;
     margin: 0 auto;
@@ -106,8 +106,8 @@ body {
 /* Custom Tables */
 .custom-table th, .learner-info-table th, .performance-marks-table th {
     color: white;
-    font-weight: 600;
-    padding: 12px 8px;
+    font-weight: 400;
+    padding: 10px 8px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     border: 1px solid #ccc;
@@ -116,7 +116,7 @@ body {
 
 .custom-table td, .learner-info-table td, .performance-marks-table td {
     padding: 10px;
-    font-weight: 500;
+    font-weight: 400;
     color: #444;
     border: 1px solid #ccc;
     white-space: nowrap;
