@@ -229,3 +229,26 @@ body {
         page-break-inside: avoid;
     }
 }
+/* OMR Button Custom Style */
+.omr-btn {
+  font-weight: 100;
+  padding: 1px 1px;
+  transition: all 0.2s ease-in-out;
+}
+
+.omr-btn:hover {
+  background-color: #004aad !important;
+  transform: scale(1.05);
+}
+
+/* Key Button Custom Style */
+.key-btn {
+  font-weight: 100;
+  padding: 1px 1px;
+  transition: all 0.2s ease-in-out;
+}
+
+.key-btn:hover {
+  background-color: #0c8f54 !important;
+  transform: scale(1.05);
+}
