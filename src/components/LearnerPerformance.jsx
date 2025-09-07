@@ -142,7 +142,7 @@ const LearnerPerformance = () => {
                   <th>TOTAL</th>
                   <th>%AGE</th>
                   <th>RANK</th>
-                  <th>MAX. MARKS</th>
+                  <th>MM</th>
                   <th>OMR</th>
                   <th>Key</th>
                 </tr>
@@ -163,7 +163,7 @@ const LearnerPerformance = () => {
                       <td>{learner['Total']}</td>
                       <td>{learner['%AGE']}</td>
                       <td>{learner['Rank']}</td>
-                      <td>{learner['Max. Marks']}</td>
+                      <td>{learner['MM']}</td>
                       <td>
                         <Button
                           variant="primary"
