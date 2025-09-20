@@ -143,13 +143,12 @@ const LearnerPerformance = () => {
                   <th>%AGE</th>
                   <th>RANK</th>
                   <th>MM</th>
-                  <th>OMR</th>
-                  <th>KEY</th>
+                  <th>Analysis</th>                 
                 </tr>
               </thead>
               <tbody>
                 {learnerData.map((learner, idx) => {
-                  const omrUrl = `${OMR_BASE_URL}/${learner.TestID}_${learner.RollNo}.jpg`;
+                  const omrUrl = `${OMR_BASE_URL}/${learner.TestID}_${learner.RollNo}.pdf`;
                   const keyUrl = `${OMR_BASE_URL}/${learner.TestID}.pdf`;
                   return (
                     <tr key={idx}>
@@ -176,18 +175,7 @@ const LearnerPerformance = () => {
                           📝
                         </Button>
                       </td>
-                      <td>
-                        <Button
-                          variant="success"
-                          size="sm"
-                          className="rounded-pill key-btn"
-                          href={keyUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          📑
-                        </Button>
-                      </td>
+                      
                     </tr>
                   );
                 })}
