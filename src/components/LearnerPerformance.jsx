@@ -130,7 +130,35 @@ const LearnerPerformance = () => {
               </tbody>
             </Table>
           </div>
-
+{/* Attendance */}
+          <div className="section-title mt-4">Attendance Report 2025-26</div>
+          <div className="table-responsive">
+            <Table bordered hover size="sm" className="text-center table-bordered">
+              <thead className="table-success">
+                <tr>
+                  <th>APR</th><th>MAY</th><th>JUN</th><th>JUL</th>
+                  <th>AUG</th><th>SEP</th><th>OCT</th><th>NOV</th>
+                  <th>DEC</th><th>JAN</th><th>FEB</th><th>MAR</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{learnerInfo.APR}</td>
+                  <td>{learnerInfo.MAY}</td>
+                  <td>{learnerInfo.JUN}</td>
+                  <td>{learnerInfo.JUL}</td>
+                  <td>{learnerInfo.AUG}</td>
+                  <td>{learnerInfo.SEP}</td>
+                  <td>{learnerInfo.OCT}</td>
+                  <td>{learnerInfo.NOV}</td>
+                  <td>{learnerInfo.DEC}</td>
+                  <td>{learnerInfo.JAN}</td>
+                  <td>{learnerInfo.FEB}</td>
+                  <td>{learnerInfo.MAR}</td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
           {/* Performance Table */}
           <div className="section-title mt-4">Learner Performance Report</div>
           {loadingLinks && <Spinner animation="border" />}
