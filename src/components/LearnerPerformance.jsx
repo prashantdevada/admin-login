@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Container, Card, Table, Button } from 'react-bootstrap';
+import { Container, Card, Table, Button, Spinner } from 'react-bootstrap';
 import './LearnerPerformance.css';
 
 const LearnerPerformance = () => {
@@ -8,6 +8,11 @@ const LearnerPerformance = () => {
   const navigate = useNavigate();
   const learnerData = location.state?.learnerData;
   const reportRef = useRef();
+  const [omrLinks, setOmrLinks] = useState({});
+  const [loadingLinks, setLoadingLinks] = useState(true);
+
+  const OMR_BASE_API = "https://api.github.com/repos/prashantdevada/OMR-KEY/contents/OMR-KEY";
+  const OMR_RAW_BASE = "https://raw.githubusercontent.com/prashantdevada/OMR-KEY/main/OMR-KEY";
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -15,6 +20,39 @@ const LearnerPerformance = () => {
       navigate('/login', { replace: true });
     }
   }, [navigate]);
+
+  useEffect(() => {
+    if (!learnerData || learnerData.length === 0) return;
+
+    const fetchOmrLinks = async () => {
+      try {
+        const res = await fetch(OMR_BASE_API);
+        const folders = await res.json();
+
+        const links = {};
+
+        learnerData.forEach(learner => {
+          const testID = learner.TestID;
+          const rollNo = learner.RollNo;
+          // Find folder containing testID
+          const folder = folders.find(f => f.type === 'dir' && f.name.startsWith(testID));
+          if (folder) {
+            links[`${testID}_${rollNo}`] = `${OMR_RAW_BASE}/${encodeURIComponent(folder.name)}/${testID}_${rollNo}.pdf`;
+          } else {
+            links[`${testID}_${rollNo}`] = null; // PDF not found
+          }
+        });
+
+        setOmrLinks(links);
+        setLoadingLinks(false);
+      } catch (err) {
+        console.error("Error fetching OMR links:", err);
+        setLoadingLinks(false);
+      }
+    };
+
+    fetchOmrLinks();
+  }, [learnerData]);
 
   if (!learnerData || learnerData.length === 0) {
     return (
@@ -33,9 +71,6 @@ const LearnerPerformance = () => {
     navigate('/login', { replace: true });
     window.location.reload();
   };
-
-  // GitHub repo base URL for OMR + Answer Keys
-  const OMR_BASE_URL = "https://raw.githubusercontent.com/prashantdevada/OMR-KEY/main/OMR-KEY";
 
   // Learner photo GitHub repo
   const GITHUB_USERNAME = "prashantdevada";
@@ -96,38 +131,9 @@ const LearnerPerformance = () => {
             </Table>
           </div>
 
-          {/* Attendance */}
-          <div className="section-title mt-4">Attendance Report 2025-26</div>
-          <div className="table-responsive">
-            <Table bordered hover size="sm" className="text-center table-bordered">
-              <thead className="table-success">
-                <tr>
-                  <th>APR</th><th>MAY</th><th>JUN</th><th>JUL</th>
-                  <th>AUG</th><th>SEP</th><th>OCT</th><th>NOV</th>
-                  <th>DEC</th><th>JAN</th><th>FEB</th><th>MAR</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{learnerInfo.APR}</td>
-                  <td>{learnerInfo.MAY}</td>
-                  <td>{learnerInfo.JUN}</td>
-                  <td>{learnerInfo.JUL}</td>
-                  <td>{learnerInfo.AUG}</td>
-                  <td>{learnerInfo.SEP}</td>
-                  <td>{learnerInfo.OCT}</td>
-                  <td>{learnerInfo.NOV}</td>
-                  <td>{learnerInfo.DEC}</td>
-                  <td>{learnerInfo.JAN}</td>
-                  <td>{learnerInfo.FEB}</td>
-                  <td>{learnerInfo.MAR}</td>
-                </tr>
-              </tbody>
-            </Table>
-          </div>
-
-          {/* Performance */}
+          {/* Performance Table */}
           <div className="section-title mt-4">Learner Performance Report</div>
+          {loadingLinks && <Spinner animation="border" />}
           <div className="table-responsive">
             <Table bordered hover size="sm" className="text-center table-bordered table-striped">
               <thead className="table-warning">
@@ -143,13 +149,14 @@ const LearnerPerformance = () => {
                   <th>%AGE</th>
                   <th>RANK</th>
                   <th>MM</th>
-                  <th>Analysis</th>                 
+                  <th>Analysis</th>
                 </tr>
               </thead>
               <tbody>
                 {learnerData.map((learner, idx) => {
-                  const omrUrl = `${OMR_BASE_URL}/${learner.TestID}_${learner.RollNo}.pdf`;
-                  const keyUrl = `${OMR_BASE_URL}/${learner.TestID}.pdf`;
+                  const key = `${learner.TestID}_${learner.RollNo}`;
+                  const omrUrl = omrLinks[key];
+
                   return (
                     <tr key={idx}>
                       <td>{idx + 1}</td>
@@ -164,18 +171,21 @@ const LearnerPerformance = () => {
                       <td>{learner['Rank']}</td>
                       <td>{learner['Max. Marks']}</td>
                       <td>
-                        <Button
-                          variant="primary"
-                          size="sm"
-                          className="rounded-pill omr-btn"
-                          href={omrUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          📝
-                        </Button>
+                        {omrUrl ? (
+                          <Button
+                            variant="primary"
+                            size="sm"
+                            className="rounded-pill omr-btn"
+                            href={omrUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            📝
+                          </Button>
+                        ) : (
+                          <span className="text-danger">Not Found</span>
+                        )}
                       </td>
-                      
                     </tr>
                   );
                 })}
