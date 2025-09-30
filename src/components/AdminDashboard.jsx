@@ -17,20 +17,34 @@ const AdminDashboard = () => {
     }
   }, [location, navigate]);
 
+  const formatPercent = (val) => {
+    if (val === null || val === undefined || val === '') return '-';
+    const num = parseFloat(val);
+    return isNaN(num) ? val : (num * 100).toFixed(2) + '%';
+  };
+
   const handleSearch = () => {
     if (!searchRollNo) return;
     setLoading(true);
-    fetch('https://sheetdb.io/api/v1/npig1v9r63hn6?ignore_cache=1')
+
+    const apiURL = `https://script.google.com/macros/s/AKfycbwwlYD49IZFUetcoSOfR8Tk795iQY60J_AEwqKwkntHwHlh8iFKM_xGiNjX33j0phqM/exec?roll=${encodeURIComponent(searchRollNo)}`;
+
+    fetch(apiURL)
       .then((res) => res.json())
       .then((data) => {
+        // ✅ Ensure RollNo match properly as string
         const filtered = data.filter(
-          (learner) => learner.RollNo && learner.RollNo.trim() === searchRollNo.trim()
+          (learner) =>
+            learner.RollNo &&
+            learner.RollNo.toString().trim().toUpperCase() === searchRollNo.trim().toUpperCase()
         );
+
         setFilteredLearners(filtered);
         setLoading(false);
       })
       .catch((err) => {
         console.error('Error fetching learner data:', err);
+        setFilteredLearners([]);
         setLoading(false);
       });
   };
@@ -40,7 +54,6 @@ const AdminDashboard = () => {
     navigate('/login', { replace: true });
   };
 
-  // Generate photo URL from GitHub repo
   const getPhotoURL = (rollNo) => {
     return `https://raw.githubusercontent.com/prashantdevada/learner-photos/main/photos/${rollNo}.jpeg`;
   };
@@ -48,24 +61,23 @@ const AdminDashboard = () => {
   return (
     <Container className="mt-5 text-center">
       <Card className="p-4 shadow-sm">
-
         <div className="d-flex justify-content-end mb-3">
           <Button variant="outline-danger" onClick={handleLogout}>🚪 Logout</Button>
         </div>
 
         <Form className="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-2 mb-4 print-only-hide">
-  <Form.Control
-    type="text"
-    placeholder="Unacademy Roll Number"
-    value={searchRollNo}
-    onChange={(e) => setSearchRollNo(e.target.value)}
-    className="text-center"
-    style={{ maxWidth: '280px' }}
-  />
-  <Button variant="primary" onClick={handleSearch}>
-    🔍 Search
-  </Button>
-</Form>
+          <Form.Control
+            type="text"
+            placeholder="Unacademy Roll Number"
+            value={searchRollNo}
+            onChange={(e) => setSearchRollNo(e.target.value)}
+            className="text-center"
+            style={{ maxWidth: '280px' }}
+          />
+          <Button variant="primary" onClick={handleSearch}>
+            🔍 Search
+          </Button>
+        </Form>
 
         {loading ? (
           <div className="text-center">
@@ -74,6 +86,7 @@ const AdminDashboard = () => {
         ) : filteredLearners.length > 0 ? (
           <div className="report-container">
             <div ref={reportRef} className="report-print-wrapper">
+              {/* Header */}
               <div className="text-center mb-4">
                 <img
                   src="https://v.fastcdn.co/u/67ec1086/61513884-0-Unacademy-Logo-RGB.png"
@@ -86,6 +99,7 @@ const AdminDashboard = () => {
                 </p>
               </div>
 
+              {/* Learner Info */}
               <div className="section-title">Learner Information</div>
               <Table bordered hover responsive size="sm" className="text-center learner-info-table">
                 <thead>
@@ -116,6 +130,7 @@ const AdminDashboard = () => {
                 </tbody>
               </Table>
 
+              {/* Attendance */}
               <div className="section-title">Attendance Report 2025-26</div>
               <Table bordered hover responsive size="sm" className="text-center table-bordered">
                 <thead className="table-success">
@@ -127,22 +142,23 @@ const AdminDashboard = () => {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{filteredLearners[0].APR}</td>
-                    <td>{filteredLearners[0].MAY}</td>
-                    <td>{filteredLearners[0].JUN}</td>
-                    <td>{filteredLearners[0].JUL}</td>
-                    <td>{filteredLearners[0].AUG}</td>
-                    <td>{filteredLearners[0].SEP}</td>
-                    <td>{filteredLearners[0].OCT}</td>
-                    <td>{filteredLearners[0].NOV}</td>
-                    <td>{filteredLearners[0].DEC}</td>
-                    <td>{filteredLearners[0].JAN}</td>
-                    <td>{filteredLearners[0].FEB}</td>
-                    <td>{filteredLearners[0].MAR}</td>
+                    <td>{formatPercent(filteredLearners[0].APR)}</td>
+                    <td>{formatPercent(filteredLearners[0].MAY)}</td>
+                    <td>{formatPercent(filteredLearners[0].JUN)}</td>
+                    <td>{formatPercent(filteredLearners[0].JUL)}</td>
+                    <td>{formatPercent(filteredLearners[0].AUG)}</td>
+                    <td>{formatPercent(filteredLearners[0].SEP)}</td>
+                    <td>{formatPercent(filteredLearners[0].OCT)}</td>
+                    <td>{formatPercent(filteredLearners[0].NOV)}</td>
+                    <td>{formatPercent(filteredLearners[0].DEC)}</td>
+                    <td>{formatPercent(filteredLearners[0].JAN)}</td>
+                    <td>{formatPercent(filteredLearners[0].FEB)}</td>
+                    <td>{formatPercent(filteredLearners[0].MAR)}</td>
                   </tr>
                 </tbody>
               </Table>
 
+              {/* Performance Report */}
               <div className="section-title">Learner Performance Report</div>
               <Table bordered hover responsive size="sm" className="text-center table-bordered table-striped">
                 <thead className="table-warning">
@@ -171,7 +187,7 @@ const AdminDashboard = () => {
                       <td>{learner["Math"]}</td>
                       <td>{learner["Bio"]}</td>
                       <td>{learner["Total"]}</td>
-                      <td>{learner["%AGE"]}</td>
+                      <td>{formatPercent(learner["%AGE"])}</td>
                       <td>{learner["Rank"]}</td>
                       <td>{learner["Max. Marks"]}</td>
                     </tr>
@@ -199,3 +215,4 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+    
