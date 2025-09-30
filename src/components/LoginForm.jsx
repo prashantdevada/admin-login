@@ -39,25 +39,18 @@ const LoginForm = () => {
       return;
     }
 
-    fetch('https://sheetdb.io/api/v1/npig1v9r63hn6?ignore_cache=1')
+    // ✅ Google Apps Script API URL (replace <deployment-id> with your deployment ID)
+    const apiURL = `https://script.google.com/macros/s/AKfycbwwlYD49IZFUetcoSOfR8Tk795iQY60J_AEwqKwkntHwHlh8iFKM_xGiNjX33j0phqM/exec?roll=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+
+    fetch(apiURL)
       .then((response) => response.json())
       .then((data) => {
-        const trimmedUsername = username.trim();
-        const trimmedPassword = password.trim();
-
-        const filteredLearners = data.filter(
-          (learner) =>
-            learner.RollNo &&
-            learner.Password &&
-            learner.RollNo === trimmedUsername &&
-            learner.Password === trimmedPassword
-        );
-
-        if (filteredLearners.length > 0) {
+        if (data.length > 0) {
+          // Login successful
           localStorage.setItem('isLoggedIn', 'true');
           setLoading(false);
           setShowOverlay(false);
-          navigate('/learnerPerformance', { state: { learnerData: filteredLearners }, replace: true });
+          navigate('/learnerPerformance', { state: { learnerData: data }, replace: true });
         } else {
           alert('Invalid Roll Number or Password');
           setLoading(false);
@@ -65,7 +58,8 @@ const LoginForm = () => {
         }
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error('Error fetching data:', error);
+        alert('Something went wrong. Please try again.');
         setLoading(false);
         setShowOverlay(false);
       });
