@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Card, Table, Button, Spinner } from 'react-bootstrap';
 import './LearnerPerformance.css';
@@ -6,13 +6,21 @@ import './LearnerPerformance.css';
 const LearnerPerformance = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const learnerData = location.state?.learnerData;
+  const learnerData = location.state?.learnerData || [];
   const reportRef = useRef();
   const [omrLinks, setOmrLinks] = useState({});
   const [loadingLinks, setLoadingLinks] = useState(true);
 
   const OMR_BASE_API = "https://api.github.com/repos/prashantdevada/OMR-KEY/contents/OMR-KEY";
   const OMR_RAW_BASE = "https://raw.githubusercontent.com/prashantdevada/OMR-KEY/main/OMR-KEY";
+
+  // Format decimal values as percentage
+  const formatPercent = (val) => {
+    if (val === null || val === undefined || val === '') return '-';
+    const num = parseFloat(val);
+    if (isNaN(num)) return val;
+    return (num * 100).toFixed(2) + '%';
+  };
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -28,18 +36,16 @@ const LearnerPerformance = () => {
       try {
         const res = await fetch(OMR_BASE_API);
         const folders = await res.json();
-
         const links = {};
 
         learnerData.forEach(learner => {
           const testID = learner.TestID;
           const rollNo = learner.RollNo;
-          // Find folder containing testID
           const folder = folders.find(f => f.type === 'dir' && f.name.startsWith(testID));
           if (folder) {
             links[`${testID}_${rollNo}`] = `${OMR_RAW_BASE}/${encodeURIComponent(folder.name)}/${testID}_${rollNo}.pdf`;
           } else {
-            links[`${testID}_${rollNo}`] = null; // PDF not found
+            links[`${testID}_${rollNo}`] = null;
           }
         });
 
@@ -72,10 +78,8 @@ const LearnerPerformance = () => {
     window.location.reload();
   };
 
-  // Learner photo GitHub repo
   const GITHUB_USERNAME = "prashantdevada";
-  const GITHUB_BASE_URL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/learner-photos/main/photos`;
-  const photoURL = `${GITHUB_BASE_URL}/${learnerInfo.RollNo}.jpeg`;
+  const photoURL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/learner-photos/main/photos/${learnerInfo.RollNo}.jpeg`;
 
   return (
     <Container className="mt-4 mb-5 text-center">
@@ -98,7 +102,7 @@ const LearnerPerformance = () => {
             </p>
           </div>
 
-          {/* Learner Info Table */}
+          {/* Learner Info */}
           <div className="section-title">Learner Information</div>
           <div className="table-responsive">
             <Table bordered hover size="sm" className="text-center learner-info-table">
@@ -130,7 +134,8 @@ const LearnerPerformance = () => {
               </tbody>
             </Table>
           </div>
-{/* Attendance */}
+
+          {/* Attendance */}
           <div className="section-title mt-4">Attendance Report 2025-26</div>
           <div className="table-responsive">
             <Table bordered hover size="sm" className="text-center table-bordered">
@@ -143,23 +148,24 @@ const LearnerPerformance = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>{learnerInfo.APR}</td>
-                  <td>{learnerInfo.MAY}</td>
-                  <td>{learnerInfo.JUN}</td>
-                  <td>{learnerInfo.JUL}</td>
-                  <td>{learnerInfo.AUG}</td>
-                  <td>{learnerInfo.SEP}</td>
-                  <td>{learnerInfo.OCT}</td>
-                  <td>{learnerInfo.NOV}</td>
-                  <td>{learnerInfo.DEC}</td>
-                  <td>{learnerInfo.JAN}</td>
-                  <td>{learnerInfo.FEB}</td>
-                  <td>{learnerInfo.MAR}</td>
+                  <td>{formatPercent(learnerInfo.APR)}</td>
+                  <td>{formatPercent(learnerInfo.MAY)}</td>
+                  <td>{formatPercent(learnerInfo.JUN)}</td>
+                  <td>{formatPercent(learnerInfo.JUL)}</td>
+                  <td>{formatPercent(learnerInfo.AUG)}</td>
+                  <td>{formatPercent(learnerInfo.SEP)}</td>
+                  <td>{formatPercent(learnerInfo.OCT)}</td>
+                  <td>{formatPercent(learnerInfo.NOV)}</td>
+                  <td>{formatPercent(learnerInfo.DEC)}</td>
+                  <td>{formatPercent(learnerInfo.JAN)}</td>
+                  <td>{formatPercent(learnerInfo.FEB)}</td>
+                  <td>{formatPercent(learnerInfo.MAR)}</td>
                 </tr>
               </tbody>
             </Table>
           </div>
-          {/* Performance Table */}
+
+          {/* Performance */}
           <div className="section-title mt-4">Learner Performance Report</div>
           {loadingLinks && <Spinner animation="border" />}
           <div className="table-responsive">
@@ -195,7 +201,7 @@ const LearnerPerformance = () => {
                       <td>{learner['Math']}</td>
                       <td>{learner['Bio']}</td>
                       <td>{learner['Total']}</td>
-                      <td>{learner['%AGE']}</td>
+                      <td>{formatPercent(learner['%AGE'])}</td>
                       <td>{learner['Rank']}</td>
                       <td>{learner['Max. Marks']}</td>
                       <td>
@@ -220,6 +226,7 @@ const LearnerPerformance = () => {
               </tbody>
             </Table>
           </div>
+
         </div>
       </Card>
     </Container>
