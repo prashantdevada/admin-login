@@ -1,6 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Container, Card, Table, Button, Spinner } from 'react-bootstrap';
+import { 
+    Container, 
+    Card, 
+    Table, 
+    Button, 
+    Spinner, 
+    Modal 
+} from 'react-bootstrap';
 import './LearnerPerformance.css';
 
 const LearnerPerformance = () => {
@@ -11,8 +18,17 @@ const LearnerPerformance = () => {
   const [omrLinks, setOmrLinks] = useState({});
   const [loadingLinks, setLoadingLinks] = useState(true);
 
+  // Time-Table के लिए नए states
+  const [showTimetableModal, setShowTimetableModal] = useState(false);
+  const [timetableData, setTimetableData] = useState([]);
+  const [loadingTimetable, setLoadingTimetable] = useState(false);
+  
   const OMR_BASE_API = "https://api.github.com/repos/prashantdevada/OMR-KEY/contents/OMR-KEY";
   const OMR_RAW_BASE = "https://raw.githubusercontent.com/prashantdevada/OMR-KEY/main/OMR-KEY";
+
+  // Google Sheet Timetable JSON API URL (SheetDB का उपयोग करके)
+  // FIX: Added '?sheet=Timetable' parameter to target the correct sub-sheet.
+  const TIMETABLE_JSON_URL = 'https://sheetdb.io/api/v1/zx84e4ydc14n6?sheet=Timetable';
 
   // Format decimal values as percentage
   const formatPercent = (val) => {
@@ -81,11 +97,91 @@ const LearnerPerformance = () => {
   const GITHUB_USERNAME = "prashantdevada";
   const photoURL = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/learner-photos/main/photos/${learnerInfo.RollNo}.jpeg`;
 
+
+  // Note: csvToJSON function हटा दिया गया है क्योंकि अब हम सीधे JSON endpoint का उपयोग कर रहे हैं।
+  
+
+  // 2. Time-Table डेटा को फ़ेच और फ़िल्टर करने का फ़ंक्शन (Using JSON API)
+  const fetchTimetable = async (batchName) => {
+    setLoadingTimetable(true);
+    setTimetableData([]);
+    
+    // Debug: The batch name we are searching for
+    console.log("Searching for Batch (trimmed):", batchName.trim());
+
+    try {
+        // Step 1: Fetch data from the CORRECT SheetDB sheet using the sheet parameter
+        const response = await fetch(TIMETABLE_JSON_URL); 
+        
+        if (!response.ok) {
+            throw new Error(`Error fetching timetable data. Status: ${response.status}`);
+        }
+        
+        const allTimetableData = await response.json(); 
+        
+        // Debug: Log raw data received (now this should contain Date, Day, Timings keys)
+        console.log("Raw Timetable Data Received:", allTimetableData);
+
+        if (!Array.isArray(allTimetableData) || allTimetableData.length === 0) {
+             throw new Error("Timetable data is empty or corrupted.");
+        }
+        
+        // Step 2: Client-side filtering for robust matching, ignoring case and spaces (using includes)
+        const trimmedBatchName = batchName.trim().toLowerCase();
+        
+        const filteredData = allTimetableData.filter(item => {
+            // Ensure item.Batch exists and trim it before comparing
+            const itemBatch = item.Batch ? item.Batch.trim().toLowerCase() : '';
+            
+            // Using includes() for flexible matching
+            return itemBatch.includes(trimmedBatchName);
+        });
+
+        // Debug: Log filtered data
+        console.log("Filtered Timetable Data:", filteredData);
+        
+        // Step 3: Update state
+        setTimetableData(filteredData);
+        setShowTimetableModal(true); 
+
+    } catch (error) {
+        console.error("Error fetching or processing Timetable:", error);
+        setTimetableData([]);
+        setShowTimetableModal(true); 
+    } finally {
+        setLoadingTimetable(false);
+    }
+  };
+  
+  const handleShowTimetable = () => {
+      const batchName = learnerInfo.Batch;
+      if (batchName) {
+          fetchTimetable(batchName);
+      } else {
+          // alert() का उपयोग नहीं करना है
+          console.error("Batch information not available for Timetable fetch.");
+          setTimetableData([]); // Clear any old data
+          setShowTimetableModal(true); // Modal खोलें ताकि 'No timetable found' मैसेज दिख सके
+      }
+  };
+
+
   return (
     <Container className="mt-4 mb-5 text-center">
       <Card className="p-3 p-md-4 shadow-sm">
         <div className="d-flex justify-content-between align-items-center mb-3 print-only-hide flex-wrap gap-2">
           <Button variant="outline-danger" onClick={handleLogout}>🚪 Logout</Button>
+          
+          {/* 3. New Time-Table Button */}
+          <Button 
+            variant="info" 
+            onClick={handleShowTimetable} 
+            disabled={loadingTimetable || !learnerInfo.Batch}
+            className="text-white"
+          >
+            {loadingTimetable ? <Spinner animation="border" size="sm" /> : '📅 Time-Table'}
+          </Button>
+
           <Button variant="secondary" onClick={() => window.print()}>🖨️ Print Report</Button>
         </div>
 
@@ -229,6 +325,70 @@ const LearnerPerformance = () => {
 
         </div>
       </Card>
+      
+      {/* 4. Time-Table Modal Component */}
+      <Modal show={showTimetableModal} onHide={() => setShowTimetableModal(false)} size="lg" centered>
+        <Modal.Header closeButton className="bg-info text-white">
+          <Modal.Title>📅 Batch Time-Table</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {loadingTimetable ? (
+            <div className="text-center p-3">
+              <Spinner animation="border" variant="info" />
+              <p className="mt-2">Fetching Timetable...</p>
+            </div>
+          ) : timetableData.length > 0 ? (
+            <>
+                <p className="fw-bold">Batch: <span className="text-primary">{learnerInfo.Batch}</span></p>
+                <div className="table-responsive">
+                    <Table bordered hover size="sm" className="text-center table-striped">
+                        <thead className="table-warning">
+                            <tr>
+                                <th>Date</th>
+                                <th>Day</th>
+                                <th>Timings</th>
+                                <th>Batch</th>
+                                <th>Room</th>
+                                <th>Educator</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {timetableData.map((item, index) => (
+                                <tr key={index}>
+                                    {/* Keys are accessed using bracket notation and match the Sheet Headers */}
+                                    <td>{item['Date']}</td>
+                                    <td>{item['Day']}</td>
+                                    <td>{item['Timings']}</td>
+                                    <td>{item['Batch']}</td>
+                                    <td>{item['Room']}</td>
+                                    <td>{item['Educator']}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>
+            </>
+          ) : (
+            <div className="text-center p-3 text-danger">
+                {/* Error message for no data or failed fetch */}
+                <p>No timetable found for batch: <span className="fw-bold">{learnerInfo.Batch}</span></p>
+                <p className="small text-muted">
+                  Please ensure:
+                  <ol className="text-start mx-auto" style={{ maxWidth: '300px' }}>
+                    <li>The **Time-Table SheetDB URL** is correct (using the `?sheet=Timetable` parameter).</li>
+                    <li>The **'Batch' name** in the Google Sheet is **identical** (case-insensitive, no extra spaces) to the batch name shown above.</li>
+                  </ol>
+                </p>
+            </div>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowTimetableModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
     </Container>
   );
 };
