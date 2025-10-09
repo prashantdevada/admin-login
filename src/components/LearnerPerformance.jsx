@@ -28,7 +28,7 @@ const LearnerPerformance = () => {
 
   // Google Sheet Timetable JSON API URL (SheetDB का उपयोग करके)
   // FIX: Added '?sheet=Timetable' parameter to target the correct sub-sheet.
-  const TIMETABLE_JSON_URL = \\'https://sheetdb.io/api/v1/zx84e4ydc14n6?sheet=Timetable';
+  const TIMETABLE_JSON_URL = 'https://sheetdb.io/api/v1/zx84e4ydc14n6?sheet=Timetable';
 
   // Format decimal values as percentage
   const formatPercent = (val) => {
