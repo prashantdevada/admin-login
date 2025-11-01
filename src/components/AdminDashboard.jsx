@@ -93,9 +93,9 @@ const AdminDashboard = () => {
                   alt="Unacademy Logo"
                   style={{ height: '60px' }}
                 />
-                <h2 className="mt-3">AHMEDABAD CENTRE</h2>
+                <h2 className="mt-3">PUNE HIPO LEARNER</h2>
                 <p className="centre-address">
-                  Address: 1st and 2nd floor, Zion Z1, Sindhu Bhavan Marg, Near Maple County Road, Bodakdev, Ahmedabad, Gujarat 380054
+                  PCMC | SWARGATE | VIMAN NAGAR
                 </p>
               </div>
 
