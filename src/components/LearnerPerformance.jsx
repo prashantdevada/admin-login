@@ -192,9 +192,9 @@ const LearnerPerformance = () => {
               alt="Unacademy Logo"
               style={{ height: '60px', maxWidth: '80%' }}
             />
-            <h2 className="mt-2">AHMEDABAD CENTRE</h2>
+            <h2 className="mt-2">PUNE Region- HIPO Learners</h2>
             <p className="centre-address small">
-              Address: 1st and 2nd floor, Zion Z1, Sindhu Bhavan Marg, near Maple County Road, Bodakdev, Ahmedabad, Gujarat 380054
+              
             </p>
           </div>
 
