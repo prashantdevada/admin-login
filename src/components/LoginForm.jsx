@@ -21,8 +21,8 @@ const LoginForm = () => {
     setShowOverlay(true);
 
     const adminCredentials = {
-      username: 'admin',
-      password: 'admin123'
+      username: 'pune',
+      password: 'pune123'
     };
 
     if (isAdmin) {
@@ -79,7 +79,7 @@ const LoginForm = () => {
                 className="logo-image"
               />
 
-              <h1 className="login-title primary-title">AHMEDABAD CENTRE</h1>
+              <h1 className="login-title primary-title">DASHBOARD</h1>
               <h2 className="login-title secondary-title">{isAdmin ? 'STAFF LOGIN' : 'LEARNER LOGIN'}</h2>
 
               <div className="text-center mb-3">
@@ -135,13 +135,13 @@ const LoginForm = () => {
 
                 {!isAdmin && (
                   <div className="social-icons mt-4">
-                    <a href="https://www.facebook.com/unacademyahmedabad/" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
                       <i className="fab fa-facebook-f"></i>
                     </a>
-                    <a href="https://www.youtube.com/@UnacademyNEET" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
                       <i className="fab fa-youtube"></i>
                     </a>
-                    <a href="https://www.instagram.com/unacademy.ahmedabad/" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
                       <i className="fab fa-instagram"></i>
                     </a>
                   </div>
