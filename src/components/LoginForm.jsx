@@ -21,8 +21,8 @@ const LoginForm = () => {
     setShowOverlay(true);
 
     const adminCredentials = {
-      username: 'pune',
-      password: 'pune123'
+      username: 'admin',
+      password: '8401126447'
     };
 
     if (isAdmin) {
