@@ -27,8 +27,7 @@ const AdminDashboard = () => {
     if (!searchRollNo) return;
     setLoading(true);
 
-    const apiURL = `https://script.google.com/macros/s/AKfycbwXvtwuQXtg0YwlEoeADDI58W4vX9JdL2DCu49y5MUnP6e4eSOuA1P8r0HAbzYurA/exec
-?roll=${encodeURIComponent(searchRollNo)}`;
+    const apiURL = `https://script.google.com/macros/s/AKfycbwXvtwuQXtg0YwlEoeADDI58W4vX9JdL2DCu49y5MUnP6e4eSOuA1P8r0HAbzYurA/exec?roll=${encodeURIComponent(searchRollNo)}`;
 
     fetch(apiURL)
       .then((res) => res.json())
