@@ -10,7 +10,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [showOverlay, setShowOverlay] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
   const navigate = useNavigate();
