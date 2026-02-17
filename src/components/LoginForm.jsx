@@ -40,7 +40,8 @@ const LoginForm = () => {
     }
 
     // ✅ Google Apps Script API URL (replace <deployment-id> with your deployment ID)
-    const apiURL = `https://script.google.com/macros/s/AKfycbzUHIy97DMLk_51BXNH3VR7jCn-yrtyVZ583GetJtC7yppBY4LoGGIyelgShCfyXIA/exec?roll=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+    const apiURL = `https://script.google.com/macros/s/AKfycbwXvtwuQXtg0YwlEoeADDI58W4vX9JdL2DCu49y5MUnP6e4eSOuA1P8r0HAbzYurA/exec
+?roll=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
 
     fetch(apiURL)
       .then((response) => response.json())
